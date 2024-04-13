@@ -1,28 +1,71 @@
-# mosilib
-
-> Made with create-react-library
-
-[![NPM](https://img.shields.io/npm/v/mosilib.svg)](https://www.npmjs.com/package/mosilib) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
-
 ## Install
 
 ```bash
-npm install --save mosilib
+npm install mosilib
+yarn add mosilib
 ```
 
 ## Usage
 
 ```jsx
-import React, { Component } from 'react'
+// test.jsx
+import { Popup, Theme, usePopupContext, useThemeContext } from 'mosilib'
 
-import MyComponent from 'mosilib'
-import 'mosilib/dist/index.css'
-
-class Example extends Component {
-  render() {
-    return <MyComponent />
-  }
+const Test = () => {
+	const { popup, setPopup } = usePopupContext()
+	const { theme, setTheme } = useThemeContext()
+	return (
+		<div>
+			<Popup title={popup.title} content={popup.content} />
+			test
+			<button onClick={() => setPopup({ title: 'test popup', content: Date.now() })}>new</button>
+			<button onClick={() => setTheme({ theme: 'dark' })}>change theme</button>
+			<Theme theme={theme} />
+		</div>
+	)
 }
+
+Test.displayName = 'Test'
+export default Test
+
+
+// App.jsx
+import logo from './logo.svg'
+import ErrorBoundary from './components/errorBoundry'
+import Test from './components/test'
+import { PopupContextProvider, ThemeContextProvider } from 'mosilib'
+import 'mosilib/dist/index.css'
+import './App.css'
+
+function App() {
+	return (
+		<ErrorBoundary fallback={<p>Something went wrong</p>}>
+			<ThemeContextProvider>
+				<PopupContextProvider>
+					<div className='App'>
+						<Test />
+						<header className='App-header'>
+							<img src={logo} className='App-logo' alt='logo' />
+							<p>
+								Edit <code>src/App.js</code> and save to reload.
+							</p>
+							<a
+								className='App-link'
+								href='https://reactjs.org'
+								target='_blank'
+								rel='noopener noreferrer'>
+								Learn React
+							</a>
+						</header>
+					</div>
+				</PopupContextProvider>
+			</ThemeContextProvider>
+		</ErrorBoundary>
+	)
+}
+
+export default App
+
 ```
 
 ## License
