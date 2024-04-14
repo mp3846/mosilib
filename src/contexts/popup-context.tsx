@@ -8,9 +8,9 @@ export type PopupContextValue = {
 
 const PopupContext = createContext<PopupContextValue | null>(null)
 
-const PopupContextProvider = ({ children }: { children: ReactNode }) => {
+const PopupProvider = ({ children }: { children: ReactNode }) => {
 	const [popup, setPopup] = useState<PopupType>({ title: '', content: '' })
 	return <PopupContext.Provider value={{ popup, setPopup }}> {children} </PopupContext.Provider>
 }
 
-export { PopupContext, PopupContextProvider }
+export { PopupContext, PopupProvider }

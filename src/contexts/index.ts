@@ -1,2 +1,2 @@
-export { ThemeContextProvider } from './theme-context'
-export { PopupContextProvider } from './popup-context'
+export { ThemeProvider } from './theme-context'
+export { PopupProvider } from './popup-context'

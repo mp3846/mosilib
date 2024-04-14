@@ -4,8 +4,7 @@ import { PopupContextValue } from '../contexts/popup-context'
 
 const usePopupContext = () => {
 	const context = useContext<PopupContextValue | null>(PopupContext)
-	if (!context)
-		throw new Error('usePopupContext hook should only be used inside PopupContextProvider')
+	if (!context) throw new Error('usePopupContext hook should only be used inside PopupProvider')
 	return context
 }
 

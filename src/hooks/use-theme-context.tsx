@@ -4,8 +4,7 @@ import { ThemeContextValue } from '../contexts/theme-context'
 
 const useThemeContext = () => {
 	const context = useContext<ThemeContextValue | null>(ThemeContext)
-	if (!context)
-		throw new Error('useThemeContext hook should only be used inside ThemeContextProvider')
+	if (!context) throw new Error('useThemeContext hook should only be used inside ThemeProvider')
 	return context
 }
 

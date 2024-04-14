@@ -2,6 +2,11 @@
 
 ```bash
 npm install mosilib
+```
+
+Or
+
+```bash
 yarn add mosilib
 ```
 
@@ -12,17 +17,17 @@ yarn add mosilib
 import { Popup, Theme, usePopupContext, useThemeContext } from 'mosilib'
 
 const Test = () => {
-	const { popup, setPopup } = usePopupContext()
-	const { theme, setTheme } = useThemeContext()
-	return (
-		<div>
-			<Popup title={popup.title} content={popup.content} />
-			test
-			<button onClick={() => setPopup({ title: 'test popup', content: Date.now() })}>new</button>
-			<button onClick={() => setTheme({ theme: 'dark' })}>change theme</button>
-			<Theme theme={theme} />
-		</div>
-	)
+    const { popup, setPopup } = usePopupContext()
+    const { theme, setTheme } = useThemeContext()
+    return (
+        <div>
+            <Popup title={popup.title} content={popup.content} />
+            test
+            <button onClick={() => setPopup({ title: 'test popup', content: Date.now() })}>new</button>
+            <button onClick={() => setTheme({ theme: 'dark' })}>change theme</button>
+            <Theme theme={theme} />
+        </div>
+    )
 }
 
 Test.displayName = 'Test'
@@ -33,35 +38,35 @@ export default Test
 import logo from './logo.svg'
 import ErrorBoundary from './components/errorBoundry'
 import Test from './components/test'
-import { PopupContextProvider, ThemeContextProvider } from 'mosilib'
+import { PopupProvider, ThemeProvider } from 'mosilib'
 import 'mosilib/dist/index.css'
 import './App.css'
 
 function App() {
-	return (
-		<ErrorBoundary fallback={<p>Something went wrong</p>}>
-			<ThemeContextProvider>
-				<PopupContextProvider>
-					<div className='App'>
-						<Test />
-						<header className='App-header'>
-							<img src={logo} className='App-logo' alt='logo' />
-							<p>
-								Edit <code>src/App.js</code> and save to reload.
-							</p>
-							<a
-								className='App-link'
-								href='https://reactjs.org'
-								target='_blank'
-								rel='noopener noreferrer'>
-								Learn React
-							</a>
-						</header>
-					</div>
-				</PopupContextProvider>
-			</ThemeContextProvider>
-		</ErrorBoundary>
-	)
+    return (
+        <ErrorBoundary fallback={<p>Something went wrong</p>}>
+            <ThemeProvider>
+                <PopupProvider>
+                    <div className='App'>
+                        <Test />
+                        <header className='App-header'>
+                            <img src={logo} className='App-logo' alt='logo' />
+                            <p>
+                                Edit <code>src/App.js</code> and save to reload.
+                            </p>
+                            <a
+                                className='App-link'
+                                href='https://reactjs.org'
+                                target='_blank'
+                                rel='noopener noreferrer'>
+                                Learn React
+                            </a>
+                        </header>
+                    </div>
+                </PopupProvider>
+            </ThemeProvider>
+        </ErrorBoundary>
+    )
 }
 
 export default App
