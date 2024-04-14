@@ -1,5 +1,4 @@
 import React from 'react'
-import styles from '../styles/popup.module.css'
 
 export interface PopupType {
 	title: string
@@ -7,7 +6,17 @@ export interface PopupType {
 }
 
 const Popup = ({ title, content }: PopupType) => (
-	<div className={styles.container}>
+	<div
+		style={{
+			display: 'flex',
+			flexDirection: 'column',
+			alignItems: 'center',
+			justifyContent: 'center',
+			backgroundColor: 'purple',
+			color: 'white',
+			fontSize: '2rem',
+			gap: '1rem'
+		}}>
 		<div>{title}</div>
 		<div>{content}</div>
 	</div>

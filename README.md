@@ -14,32 +14,34 @@ yarn add mosilib
 
 ```jsx
 // test.jsx
-import { Popup, Theme, usePopupContext, useThemeContext } from 'mosilib'
+import { Theme, useThemeContext, usePopupContext, Popup } from 'mosilib'
 
 const Test = () => {
-    const { popup, setPopup } = usePopupContext()
-    const { theme, setTheme } = useThemeContext()
-    return (
-        <div>
-            <Popup title={popup.title} content={popup.content} />
-            test
-            <button onClick={() => setPopup({ title: 'test popup', content: Date.now() })}>new</button>
-            <button onClick={() => setTheme({ theme: 'dark' })}>change theme</button>
-            <Theme theme={theme} />
-        </div>
-    )
+	const { popup, setPopup } = usePopupContext()
+	const { theme, setTheme } = useThemeContext()
+	return (
+		<div>
+			<Popup title={popup.title} content={popup.content} />
+			test
+			<button onClick={() => setPopup({ title: 'test popup', content: Date.now() })}>
+				new timestamp
+			</button>
+			<button onClick={() => setTheme('custom')}>change theme</button>
+			<Theme theme={theme} />
+		</div>
+	)
 }
 
 Test.displayName = 'Test'
 export default Test
+```
 
-
+```jsx
 // App.jsx
 import logo from './logo.svg'
 import ErrorBoundary from './components/errorBoundry'
 import Test from './components/test'
 import { PopupProvider, ThemeProvider } from 'mosilib'
-import 'mosilib/dist/index.css'
 import './App.css'
 
 function App() {
