@@ -3,9 +3,18 @@ import React from 'react'
 export interface PopupType {
 	title: string
 	content: string
+	mode?: 'toast' | 'warning' | 'error'
+	confirmText?: string
+	onConfirm?: () => void
 }
 
-const Popup = ({ title, content }: PopupType) => (
+const Popup = ({
+	title = 'title',
+	content = 'content',
+	mode = 'toast',
+	confirmText = 'Confirm',
+	onConfirm = () => {}
+}: PopupType) => (
 	<div
 		style={{
 			display: 'flex',
@@ -19,6 +28,7 @@ const Popup = ({ title, content }: PopupType) => (
 		}}>
 		<div>{title}</div>
 		<div>{content}</div>
+		<button onClick={onConfirm}>{confirmText}</button>
 	</div>
 )
 
