@@ -7,13 +7,14 @@
 	"repository": "https://github.com/mp3846/mosilib",
 	"main": "dist/index.js",
 	"module": "dist/index.modern.js",
+	"type": "module",
 	"source": "src/index.ts",
 	"engines": {
 		"node": ">=10"
 	},
 	"scripts": {
-		"watch": "microbundle-crl watch --format modern,cjs",
-		"build": "microbundle-crl --format modern,cjs",
+		"watch": "microbundle-crl watch --format modern,cjs --no-sourcemap",
+		"build": "microbundle-crl --format modern,cjs --no-sourcemap && node ./injectCSS.js",
 		"sb": "storybook dev -p 6006",
 		"sbbuild": "storybook build"
 	},
@@ -43,5 +44,8 @@
 		"dist"
 	],
 	"types": "dist/index.d.ts",
-	"packageManager": "yarn@4.1.1+sha224.00f08619463229f8ba40c4ee90e8c2e4ced1f11c3115c26f3b98432e"
+	"packageManager": "yarn@4.1.1+sha224.00f08619463229f8ba40c4ee90e8c2e4ced1f11c3115c26f3b98432e",
+	"dependencies": {
+		"@radix-ui/react-toast": "^1.1.5"
+	}
 }

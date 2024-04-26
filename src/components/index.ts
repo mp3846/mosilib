@@ -1,2 +1,2 @@
-export { default as Popup } from './popup'
+export { default as Toast } from './toast'
 export { default as Theme } from './theme'

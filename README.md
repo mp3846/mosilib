@@ -14,16 +14,16 @@ yarn add mosilib
 
 ```jsx
 // test.jsx
-import { Theme, useThemeContext, usePopupContext, Popup } from 'mosilib'
+import { Theme, useThemeContext, useToastContext, Toast } from 'mosilib'
 
 const Test = () => {
-	const { popup, setPopup } = usePopupContext()
+	const { toast, setToast } = useToastContext()
 	const { theme, setTheme } = useThemeContext()
 	return (
 		<div>
-			<Popup title={popup.title} content={popup.content} />
+			<Toast title={toast.title} content={toast.content} />
 			test
-			<button onClick={() => setPopup({ title: 'test popup', content: Date.now() })}>
+			<button onClick={() => setToast({ title: 'test toast', content: Date.now() })}>
 				new timestamp
 			</button>
 			<button onClick={() => setTheme('custom')}>change theme</button>
@@ -41,14 +41,14 @@ export default Test
 import logo from './logo.svg'
 import ErrorBoundary from './components/errorBoundry'
 import Test from './components/test'
-import { PopupProvider, ThemeProvider } from 'mosilib'
+import { ToastProvider, ThemeProvider } from 'mosilib'
 import './App.css'
 
 function App() {
     return (
         <ErrorBoundary fallback={<p>Something went wrong</p>}>
             <ThemeProvider>
-                <PopupProvider>
+                <ToastProvider>
                     <div className='App'>
                         <Test />
                         <header className='App-header'>
@@ -65,7 +65,7 @@ function App() {
                             </a>
                         </header>
                     </div>
-                </PopupProvider>
+                </ToastProvider>
             </ThemeProvider>
         </ErrorBoundary>
     )

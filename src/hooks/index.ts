@@ -1,2 +1,2 @@
 export { default as useThemeContext } from './use-theme-context'
-export { default as usePopupContext } from './use-popup-context'
+export { default as useToastContext } from './use-toast-context'
