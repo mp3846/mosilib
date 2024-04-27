@@ -62,7 +62,7 @@ const Toast: FC<ToastType> = ({
 				{delayedContent}
 			</RXToast.Description>
 			{hasAction && (
-				<RXToast.Action className={styles.toastAction} altText='Action'>
+				<RXToast.Action onClick={onAction} className={styles.toastAction} altText='Action'>
 					{actionText}
 				</RXToast.Action>
 			)}
