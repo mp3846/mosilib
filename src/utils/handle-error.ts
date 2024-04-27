@@ -7,14 +7,14 @@ type ErrorWithResponse = Error & { response: ErrorResponse }
 
 type ErrorDetails = {
 	title: string
-	content: string | any
+	content: string
 }
 
-const handleError = (error: Error | ErrorWithResponse): ErrorDetails | undefined => {
-	if (!error) return undefined
+const handleError = (error: any): ErrorDetails => {
+	if (!error) return { title: '', content: '' }
 
 	let title = 'Client Error'
-	let content = error.message || error.stack || error.toString()
+	let content = error.message || error.toString()
 
 	if ('response' in error && error.hasOwnProperty('response')) {
 		const { status, data } = (error as ErrorWithResponse).response
