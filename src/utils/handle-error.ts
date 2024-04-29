@@ -1,31 +1,17 @@
-type ErrorResponse = {
-	status: number
-	data: any
-}
-
-type ErrorWithResponse = Error & { response: ErrorResponse }
-
 type ErrorDetails = {
 	title: string
 	content: string
 }
 
-const handleError = (error: any): ErrorDetails => {
+const getErrorMessage = (error: unknown): string => {
+	let message: string = 'Something went wrong!'
+	if (error instanceof Error) message = error.message
+	return message
+}
+
+const handleError = (error: unknown): ErrorDetails => {
 	if (!error) return { title: '', content: '' }
-
-	let title = 'Client Error'
-	let content = error.message || error.toString()
-
-	if ('response' in error && error.hasOwnProperty('response')) {
-		const { status, data } = (error as ErrorWithResponse).response
-		title = status > 499 ? 'Server Error' : 'Bad Request'
-		content = data
-		console.log(`Error ${status} => ${content}`)
-	} else {
-		console.error(error)
-	}
-
-	return { title, content }
+	return { title: (error as any).name || 'Error', content: getErrorMessage(error) }
 }
 
 export default handleError
