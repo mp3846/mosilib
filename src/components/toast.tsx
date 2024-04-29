@@ -23,14 +23,17 @@ const Toast: FC<ToastType> = ({
 	...props
 }) => {
 	const [open, setOpen] = useState(false)
-	const [delayedTitle, setDelayedTitle] = useState<string | undefined>('')
-	const [delayedContent, setDelayedContent] = useState<string | undefined>('')
+	const [delayedProps, setDelayedProps] = useState<ToastType>({})
 
 	useEffect(() => {
 		const showToast = !!(title || content)
 		setOpen(showToast)
-		// Introducing a delay for a smooth fade-out transition when closing the toast
-		setTimeout(() => (setDelayedTitle(title), setDelayedContent(content)), showToast ? 0 : 300)
+		// Delay for smooth fade-out
+		const timeoutID = setTimeout(
+			() => setDelayedProps({ title, content, mode, duration, hasAction, actionText }),
+			showToast ? 0 : 300
+		)
+		return () => clearTimeout(timeoutID)
 	}, [title, content])
 
 	return (
@@ -38,32 +41,32 @@ const Toast: FC<ToastType> = ({
 			className={styles.toastRoot}
 			open={open}
 			onOpenChange={setOpen}
-			duration={duration}
+			duration={delayedProps.duration}
 			{...props}>
 			<div className={styles.titleWrapper}>
 				<RXToast.Title
 					className={styles.toastTitle}
-					style={{ color: `var(--toast-color-title-${mode})` }}>
-					{delayedTitle}
+					style={{ color: `var(--toast-color-title-${delayedProps.mode})` }}>
+					{delayedProps.title}
 				</RXToast.Title>
 				<RXToast.Close className={styles.toastClose} aria-label='Close'>
 					<span aria-hidden>x</span>
 				</RXToast.Close>
 			</div>
-			{delayedTitle && (
+			{delayedProps.title && (
 				<span
 					className={styles.separator}
-					style={{ background: `var(--toast-color-title-${mode})` }}
+					style={{ background: `var(--toast-color-title-${delayedProps.mode})` }}
 				/>
 			)}
 			<RXToast.Description
 				className={styles.toastDescription}
-				style={{ marginBottom: !hasAction ? '10px' : 'unset' }}>
-				{delayedContent}
+				style={{ marginBottom: !delayedProps.hasAction ? '10px' : 'unset' }}>
+				{delayedProps.content}
 			</RXToast.Description>
-			{hasAction && (
+			{delayedProps.hasAction && (
 				<RXToast.Action onClick={onAction} className={styles.toastAction} altText='Action'>
-					{actionText}
+					{delayedProps.actionText}
 				</RXToast.Action>
 			)}
 		</RXToast.Root>
