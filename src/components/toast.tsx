@@ -1,11 +1,13 @@
 import React, { FC, useEffect, useState } from 'react'
 import * as RXToast from '@radix-ui/react-toast'
 import styles from './styles/toast.module.css'
+import { joiner } from '../utils'
 
 export interface ToastType {
 	title?: string
 	content?: string
 	mode?: 'info' | 'warning' | 'error'
+	className?: string
 	duration?: number
 	hasAction?: boolean
 	actionText?: string
@@ -16,6 +18,7 @@ const Toast: FC<ToastType> = ({
 	title,
 	content,
 	mode = 'info',
+	className = '',
 	duration = Infinity,
 	hasAction = false,
 	actionText = 'OK',
@@ -38,7 +41,7 @@ const Toast: FC<ToastType> = ({
 
 	return (
 		<RXToast.Root
-			className={styles.toastRoot}
+			className={joiner(styles.toastRoot, className)}
 			open={open}
 			onOpenChange={setOpen}
 			duration={delayedProps.duration}
