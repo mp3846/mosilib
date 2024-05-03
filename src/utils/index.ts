@@ -1,2 +1,2 @@
 export { default as handleError } from './handle-error'
-export { joiner } from './freq-funcs'
+export { joiner, capitalize } from './freq-funcs'
