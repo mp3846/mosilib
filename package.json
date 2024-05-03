@@ -15,6 +15,7 @@
 	"scripts": {
 		"watch": "microbundle-crl watch --format modern,cjs --no-sourcemap",
 		"build": "microbundle-crl --format modern,cjs --no-sourcemap && node ./injectCSS.js",
+		"publish": "yarn build && npm publish",
 		"sb": "storybook dev -p 6006",
 		"sbbuild": "storybook build"
 	},
