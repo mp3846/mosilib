@@ -1,6 +1,6 @@
 {
 	"name": "mosilib",
-	"version": "1.0.7",
+	"version": "1.0.8",
 	"description": "Made with create-react-library",
 	"author": "mp3846",
 	"license": "MIT",
@@ -15,7 +15,7 @@
 	"scripts": {
 		"watch": "microbundle-crl watch --format modern,cjs --no-sourcemap",
 		"build": "microbundle-crl --format modern,cjs --no-sourcemap && node ./injectCSS.js",
-		"publish": "yarn build && npm publish",
+		"publish": "npm run build && npm publish",
 		"sb": "storybook dev -p 6006",
 		"sbbuild": "storybook build"
 	},
