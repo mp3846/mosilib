@@ -1,11 +1,10 @@
-import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 
 import Button from '../components/button'
 const meta: Meta<typeof Button> = {
 	component: Button,
 	parameters: {
-		layout: 'padded',
+		layout: 'centered',
 		backgrounds: { default: 'light-gray' }
 	},
 	tags: ['autodocs'],
@@ -15,4 +14,16 @@ const meta: Meta<typeof Button> = {
 export default meta
 type Story = StoryObj<typeof Button>
 
-export const Primary: Story = {}
+export const _3D: Story = {
+	args: {
+		text: 'Click me',
+		mode: '3D'
+	}
+}
+
+export const Simple: Story = {
+	args: {
+		text: 'Click me',
+		mode: 'simple'
+	}
+}

@@ -4,12 +4,15 @@ import { joiner } from '../utils'
 
 type ButtonType = {
 	text: string
+	mode: 'simple' | '3D'
 	className?: string
 }
 
-const Button: FC<ButtonType> = ({ text, className, ...props }) => (
+const Button: FC<ButtonType> = ({ text, mode, className, ...props }) => (
 	<div className={styles.container}>
-		<button className={joiner(styles.button, className || '')} {...props}>
+		<button
+			className={joiner(styles.button, styles['button-' + mode], className || '')}
+			{...props}>
 			{text}
 		</button>
 	</div>
