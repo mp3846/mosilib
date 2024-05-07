@@ -11,6 +11,10 @@ type CheckboxType = {
 	checked: boolean
 	onChange?: (checked: CheckedState) => void
 	label: string
+	disabled?: boolean
+	required?: boolean
+	name?: string
+	value?: 'on' | 'off'
 	mode?: 'simple' | 'fill'
 	className?: string
 }
@@ -21,11 +25,19 @@ const Checkbox: FC<CheckboxType> = ({
 	onChange = () => {},
 	label,
 	className,
+	disabled = false,
+	required = false,
+	name,
+	value,
 	mode = 'simple'
 }) => (
 	<div className={styles.container}>
 		<RXCheckbox.Root
 			id='c1'
+			name={name}
+			disabled={disabled}
+			required={required}
+			value={value}
 			className={joiner(styles.root, className || '')}
 			defaultChecked={defaultChecked}
 			checked={checked}
