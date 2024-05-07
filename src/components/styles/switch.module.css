@@ -67,9 +67,9 @@ button {
 	line-height: 1;
 }
 
-.thumb.simple {
+.thumb.switch_simple {
 	background-color: white;
-	box-shadow: 0 2px 2px #0000006b;
+	box-shadow: 0 2px 2px #00000048;
 }
 
 .root.switch_3D {
@@ -89,10 +89,10 @@ button {
 	box-shadow: 4px 4px 8px 0 #a8a8a8;
 }
 
-.thumb::before {
+.thumb.switch_3D::before {
 	content: 'OFF';
 }
 
-.thumb[data-state='checked']::before {
+.thumb.switch_3D[data-state='checked']::before {
 	content: 'ON';
 }
