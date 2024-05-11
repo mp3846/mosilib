@@ -2,7 +2,7 @@ import React, { FC, Fragment, ReactNode, useEffect } from 'react'
 import { useToastContext } from '../hooks'
 import { handleError } from '../utils'
 
-const GlobalErrorBoundary: FC<any> = ({ children }: { children: ReactNode }) => {
+const GlobalErrorHandler: FC<any> = ({ children }: { children: ReactNode }) => {
 	const { setToast } = useToastContext()
 
 	useEffect(() => {
@@ -28,4 +28,4 @@ const GlobalErrorBoundary: FC<any> = ({ children }: { children: ReactNode }) => 
 	return <Fragment>{children}</Fragment>
 }
 
-export default GlobalErrorBoundary
+export default GlobalErrorHandler
