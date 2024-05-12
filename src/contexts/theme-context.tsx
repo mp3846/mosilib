@@ -7,8 +7,14 @@ export type ThemeContextValue = {
 
 const ThemeContext = createContext<ThemeContextValue | null>(null)
 
-const ThemeProvider = ({ children }: { children: ReactNode }) => {
-	const [theme, setTheme] = useState('default')
+const ThemeProvider = ({
+	children,
+	defaultTheme = 'default'
+}: {
+	children: ReactNode
+	defaultTheme?: string
+}) => {
+	const [theme, setTheme] = useState(defaultTheme)
 	return <ThemeContext.Provider value={{ theme, setTheme }}> {children} </ThemeContext.Provider>
 }
 
