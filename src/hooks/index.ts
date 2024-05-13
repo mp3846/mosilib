@@ -1,4 +1,5 @@
 export { default as useThemeContext } from './use-theme-context'
 export { default as useToastContext } from './use-toast-context'
+export { default as useLocalStorageContext } from './use-local-storage-context'
 export { default as useTryCatch } from './use-try-catch'
 export { default as useMouseMove } from './use-mouse-move'
