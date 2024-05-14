@@ -4,12 +4,10 @@ import * as RXCheckbox from '@radix-ui/react-checkbox'
 import { joiner } from '../utils'
 import { LuCheck } from 'react-icons/lu'
 
-type CheckedState = boolean | 'indeterminate'
-
 type CheckboxType = {
 	defaultChecked?: boolean
 	checked: boolean
-	onChange?: (checked: CheckedState) => void
+	onChange?: (checked: boolean) => void
 	label?: string
 	labelSide?: 'right' | 'left'
 	disabled?: boolean
@@ -47,7 +45,7 @@ const Checkbox: FC<CheckboxType> = ({
 				className={joiner(styles.root, className || '')}
 				defaultChecked={defaultChecked}
 				checked={checked}
-				onCheckedChange={onChange}>
+				onCheckedChange={(checkedState) => onChange(!!checkedState)}>
 				<RXCheckbox.Indicator className={joiner(styles.indicator, styles[mode])}>
 					<LuCheck />
 				</RXCheckbox.Indicator>
