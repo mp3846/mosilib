@@ -1,8 +1,14 @@
+import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
-
 import Checkbox from '../components/checkbox'
+import { defaultFont } from './helper'
+
 const meta: Meta<typeof Checkbox> = {
-	component: Checkbox,
+	render: (args) => (
+		<div style={{ fontFamily: defaultFont }}>
+			<Checkbox {...args} />
+		</div>
+	),
 	parameters: {
 		layout: 'centered',
 		backgrounds: { default: 'light-gray' }

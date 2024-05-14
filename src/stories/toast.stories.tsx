@@ -1,9 +1,9 @@
 import React from 'react'
 import { fn } from '@storybook/test'
 import type { Meta, StoryObj } from '@storybook/react'
-
 import Toast from '../components/toast'
 import { ToastProvider } from '../contexts/toast-context'
+import { defaultFont } from './helper'
 
 const meta: Meta<typeof Toast> = {
 	component: Toast,
@@ -12,7 +12,7 @@ const meta: Meta<typeof Toast> = {
 		backgrounds: { default: 'light-gray' }
 	},
 	render: (args) => (
-		<div style={{ height: '150px' }}>
+		<div style={{ height: '150px', fontFamily: defaultFont }}>
 			<ToastProvider>
 				<Toast {...args} />
 			</ToastProvider>

@@ -1,8 +1,14 @@
+import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
-
 import Button from '../components/button'
+import { defaultFont } from './helper'
+
 const meta: Meta<typeof Button> = {
-	component: Button,
+	render: (args) => (
+		<div style={{ fontFamily: defaultFont }}>
+			<Button {...args} />
+		</div>
+	),
 	parameters: {
 		layout: 'centered',
 		backgrounds: { default: 'light-gray' }
