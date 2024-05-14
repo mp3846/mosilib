@@ -1,0 +1,56 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-family: inherit;
+	gap: 10px;
+}
+
+.label {
+	color: inherit;
+	font-family: inherit;
+	font-size: 15px;
+	line-height: 1;
+}
+
+.input {
+	outline: none;
+	border: none;
+	border-radius: 4px;
+	padding: 5px 10px;
+	font-family: inherit;
+	background-color: transparent;
+	font-size: 15px;
+}
+
+.input::placeholder{
+	font-style: italic;
+	font-size: 14px;
+}
+
+.input.input_simple {
+	border: 1px solid #dcdddf;
+}
+
+.input.input_simple:focus {
+	border: 1px solid #abacad;
+}
+
+.input.input_3D {
+	box-shadow:
+		0 0 1px 0 #75757511,
+		inset 2px 2px 4px 0 #a8a8a8,
+		inset -2px -2px 4px 0 #fff;
+}
+
+.input.input_3D:focus {
+	box-shadow:
+		0 0 1px 0 #75757511,
+		inset 2px 2px 4px 0 #696969,
+		inset -2px -2px 4px 0 #fff;
+}
+
+.input::selection {
+	background-color: #39383b;
+	color: #e3eaee;
+}
