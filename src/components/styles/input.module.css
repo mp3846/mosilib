@@ -9,7 +9,6 @@
 .label {
 	color: inherit;
 	font-family: inherit;
-	font-size: 15px;
 	line-height: 1;
 }
 
@@ -19,13 +18,13 @@
 	border-radius: 4px;
 	padding: 5px 10px;
 	font-family: inherit;
+	font-size: 1rem;
 	background-color: transparent;
-	font-size: 15px;
 }
 
 .input::placeholder{
 	font-style: italic;
-	font-size: 14px;
+	font-size: 0.9rem;
 }
 
 .input.input_simple {
