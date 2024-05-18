@@ -1,7 +1,29 @@
 import React, { FC, useId } from 'react'
 import styles from './styles/select.module.css'
 import { joiner } from '../utils'
-import ReactSelect from 'react-select'
+import ReactSelect, {
+	CSSObjectWithLabel,
+	ClearIndicatorProps,
+	ContainerProps,
+	ControlProps,
+	DropdownIndicatorProps,
+	GroupBase,
+	GroupHeadingProps,
+	GroupProps,
+	IndicatorSeparatorProps,
+	IndicatorsContainerProps,
+	InputProps,
+	LoadingIndicatorProps,
+	MenuListProps,
+	MenuProps,
+	MenuPortalProps,
+	MultiValueProps,
+	MultiValueRemoveProps,
+	OptionProps,
+	PlaceholderProps,
+	ValueContainerProps,
+	NoticeProps
+} from 'react-select'
 
 type SelectType = {
 	onChange?: (newValue: any) => void
@@ -21,31 +43,39 @@ type SelectType = {
 	defaultValue?: any
 	defaultInputValue?: any
 	options?: Array<{ label: string; value: any }>
-	containerStyles?: any
-	controlStyles?: any
-	menuStyles?: any
-	menuListStyles?: any
-	inputStyles?: any
-	placeholderStyles?: any
-	optionStyles?: any
-	groupStyles?: any
-	indicatorsContainerStyles?: any
-	indicatorSeparatorStyles?: any
-	dropdownIndicatorStyles?: any
-	loadingIndicatorStyles?: any
-	clearIndicatorStyles?: any
-	groupHeadingStyles?: any
-	loadingMessageStyles?: any
-	menuPortalStyles?: any
-	noOptionsMessageStyles?: any
-	valueContainerStyles?: any
-	singleValueStyles?: any
-	multiValueStyles?: any
-	multiValueLabelStyles?: any
-	multiValueRemoveStyles?: any
+	containerStyles?: OverridingStyles<ContainerProps<any, false, GroupBase<any>>>
+	controlStyles?: OverridingStyles<ControlProps<any, false, GroupBase<any>>>
+	menuStyles?: OverridingStyles<MenuProps<any, false, GroupBase<any>>>
+	menuListStyles?: OverridingStyles<MenuListProps<any, false, GroupBase<any>>>
+	inputStyles?: OverridingStyles<InputProps<any, false, GroupBase<any>>>
+	placeholderStyles?: OverridingStyles<PlaceholderProps<any, false, GroupBase<any>>>
+	optionStyles?: OverridingStyles<OptionProps<any, false, GroupBase<any>>>
+	groupStyles?: OverridingStyles<GroupProps<any, false, GroupBase<any>>>
+	dropdownIndicatorStyles?: OverridingStyles<DropdownIndicatorProps<any, false, GroupBase<any>>>
+	loadingIndicatorStyles?: OverridingStyles<LoadingIndicatorProps<any, false, GroupBase<any>>>
+	clearIndicatorStyles?: OverridingStyles<ClearIndicatorProps<any, false, GroupBase<any>>>
+	groupHeadingStyles?: OverridingStyles<GroupHeadingProps<any, false, GroupBase<any>>>
+	loadingMessageStyles?: OverridingStyles<LoadingIndicatorProps<any, false, GroupBase<any>>>
+	menuPortalStyles?: OverridingStyles<MenuPortalProps<any, false, GroupBase<any>>>
+	noOptionsMessageStyles?: OverridingStyles<NoticeProps<any, false, GroupBase<any>>>
+	valueContainerStyles?: OverridingStyles<ValueContainerProps<any, false, GroupBase<any>>>
+	singleValueStyles?: OverridingStyles<MultiValueProps<any, false, GroupBase<any>>>
+	multiValueStyles?: OverridingStyles<MultiValueProps<any, false, GroupBase<any>>>
+	multiValueLabelStyles?: OverridingStyles<MultiValueProps<any, false, GroupBase<any>>>
+	multiValueRemoveStyles?: OverridingStyles<MultiValueRemoveProps<any, false, GroupBase<any>>>
+	indicatorSeparatorStyles?: OverridingStyles<IndicatorSeparatorProps<any, false, GroupBase<any>>>
+	indicatorsContainerStyles?: OverridingStyles<
+		IndicatorsContainerProps<any, false, GroupBase<any>>
+	>
 }
 
-const extendBase = (newStyles: any) => (base: any) => ({ ...base, ...newStyles })
+type OverridingStyles<T> = (state: T) => CSSObjectWithLabel
+
+const extendBase =
+	(newStyles: OverridingStyles<any> | undefined) => (base: CSSObjectWithLabel, state: any) => ({
+		...base,
+		...(newStyles ? newStyles(state) : {})
+	})
 
 const Select: FC<SelectType> = ({
 	onChange = () => {},
