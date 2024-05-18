@@ -7,7 +7,6 @@ import ReactSelect, {
 	ContainerProps,
 	ControlProps,
 	DropdownIndicatorProps,
-	GroupBase,
 	GroupHeadingProps,
 	GroupProps,
 	IndicatorSeparatorProps,
@@ -16,13 +15,14 @@ import ReactSelect, {
 	LoadingIndicatorProps,
 	MenuListProps,
 	MenuProps,
-	MenuPortalProps,
 	MultiValueProps,
 	MultiValueRemoveProps,
 	OptionProps,
 	PlaceholderProps,
 	ValueContainerProps,
-	NoticeProps
+	NoticeProps,
+	SingleValueProps,
+	PortalStyleArgs
 } from 'react-select'
 
 type SelectType = {
@@ -43,39 +43,42 @@ type SelectType = {
 	defaultValue?: any
 	defaultInputValue?: any
 	options?: Array<{ label: string; value: any }>
-	containerStyles?: OverridingStyles<ContainerProps<any, false, GroupBase<any>>>
-	controlStyles?: OverridingStyles<ControlProps<any, false, GroupBase<any>>>
-	menuStyles?: OverridingStyles<MenuProps<any, false, GroupBase<any>>>
-	menuListStyles?: OverridingStyles<MenuListProps<any, false, GroupBase<any>>>
-	inputStyles?: OverridingStyles<InputProps<any, false, GroupBase<any>>>
-	placeholderStyles?: OverridingStyles<PlaceholderProps<any, false, GroupBase<any>>>
-	optionStyles?: OverridingStyles<OptionProps<any, false, GroupBase<any>>>
-	groupStyles?: OverridingStyles<GroupProps<any, false, GroupBase<any>>>
-	dropdownIndicatorStyles?: OverridingStyles<DropdownIndicatorProps<any, false, GroupBase<any>>>
-	loadingIndicatorStyles?: OverridingStyles<LoadingIndicatorProps<any, false, GroupBase<any>>>
-	clearIndicatorStyles?: OverridingStyles<ClearIndicatorProps<any, false, GroupBase<any>>>
-	groupHeadingStyles?: OverridingStyles<GroupHeadingProps<any, false, GroupBase<any>>>
-	loadingMessageStyles?: OverridingStyles<LoadingIndicatorProps<any, false, GroupBase<any>>>
-	menuPortalStyles?: OverridingStyles<MenuPortalProps<any, false, GroupBase<any>>>
-	noOptionsMessageStyles?: OverridingStyles<NoticeProps<any, false, GroupBase<any>>>
-	valueContainerStyles?: OverridingStyles<ValueContainerProps<any, false, GroupBase<any>>>
-	singleValueStyles?: OverridingStyles<MultiValueProps<any, false, GroupBase<any>>>
-	multiValueStyles?: OverridingStyles<MultiValueProps<any, false, GroupBase<any>>>
-	multiValueLabelStyles?: OverridingStyles<MultiValueProps<any, false, GroupBase<any>>>
-	multiValueRemoveStyles?: OverridingStyles<MultiValueRemoveProps<any, false, GroupBase<any>>>
-	indicatorSeparatorStyles?: OverridingStyles<IndicatorSeparatorProps<any, false, GroupBase<any>>>
-	indicatorsContainerStyles?: OverridingStyles<
-		IndicatorsContainerProps<any, false, GroupBase<any>>
-	>
+	containerStyles?: OverridingStyles<ContainerProps>
+	controlStyles?: OverridingStyles<ControlProps>
+	menuStyles?: OverridingStyles<MenuProps>
+	menuListStyles?: OverridingStyles<MenuListProps>
+	inputStyles?: OverridingStyles<InputProps>
+	placeholderStyles?: OverridingStyles<PlaceholderProps>
+	optionStyles?: OverridingStyles<OptionProps>
+	groupStyles?: OverridingStyles<GroupProps>
+	dropdownIndicatorStyles?: OverridingStyles<DropdownIndicatorProps>
+	loadingIndicatorStyles?: OverridingStyles<LoadingIndicatorProps>
+	clearIndicatorStyles?: OverridingStyles<ClearIndicatorProps>
+	groupHeadingStyles?: OverridingStyles<GroupHeadingProps>
+	loadingMessageStyles?: OverridingStyles<NoticeProps>
+	menuPortalStyles?: OverridingStyles<PortalStyleArgs>
+	noOptionsMessageStyles?: OverridingStyles<NoticeProps>
+	valueContainerStyles?: OverridingStyles<ValueContainerProps>
+	singleValueStyles?: OverridingStyles<SingleValueProps>
+	multiValueStyles?: OverridingStyles<MultiValueProps>
+	multiValueLabelStyles?: OverridingStyles<MultiValueProps>
+	multiValueRemoveStyles?: OverridingStyles<MultiValueRemoveProps>
+	indicatorSeparatorStyles?: OverridingStyles<IndicatorSeparatorProps>
+	indicatorsContainerStyles?: OverridingStyles<IndicatorsContainerProps>
 }
 
 type OverridingStyles<T> = (state: T) => CSSObjectWithLabel
 
-const extendBase =
-	(newStyles: OverridingStyles<any> | undefined) => (base: CSSObjectWithLabel, state: any) => ({
-		...base,
-		...(newStyles ? newStyles(state) : {})
-	})
+type ExtendBase = <T>(
+	newStyles?: OverridingStyles<T>,
+	modeStyles?: OverridingStyles<T>
+) => (base: CSSObjectWithLabel, state: T) => CSSObjectWithLabel
+
+const extendBase: ExtendBase = (newStyles, modeStyles) => (base, state) => ({
+	...base,
+	...(modeStyles ? modeStyles(state) : {}),
+	...(newStyles ? newStyles(state) : {})
+})
 
 const Select: FC<SelectType> = ({
 	onChange = () => {},
@@ -121,6 +124,11 @@ const Select: FC<SelectType> = ({
 }) => {
 	const uniqueID = useId()
 	const uniqueInstanceID = useId()
+
+	const dropdownModeStyles: OverridingStyles<DropdownIndicatorProps> = (state) => ({
+		display: mode === 'simple' ? 'block' : 'none'
+	})
+
 	return (
 		<div
 			className={styles.container}
@@ -143,28 +151,33 @@ const Select: FC<SelectType> = ({
 				onChange={onChange}
 				className={joiner(styles.select, styles[`select_${mode}`], className || '')}
 				styles={{
-					container: extendBase(containerStyles),
-					control: extendBase(controlStyles),
-					menu: extendBase(menuStyles),
-					menuList: extendBase(menuListStyles),
-					input: extendBase(inputStyles),
-					placeholder: extendBase(placeholderStyles),
-					option: extendBase(optionStyles),
-					group: extendBase(groupStyles),
-					indicatorSeparator: extendBase(indicatorSeparatorStyles),
-					clearIndicator: extendBase(clearIndicatorStyles),
-					loadingIndicator: extendBase(loadingIndicatorStyles),
-					dropdownIndicator: extendBase(dropdownIndicatorStyles),
-					indicatorsContainer: extendBase(indicatorsContainerStyles),
-					groupHeading: extendBase(groupHeadingStyles),
-					loadingMessage: extendBase(loadingMessageStyles),
-					menuPortal: extendBase(menuPortalStyles),
-					noOptionsMessage: extendBase(noOptionsMessageStyles),
-					valueContainer: extendBase(valueContainerStyles),
-					singleValue: extendBase(singleValueStyles),
-					multiValue: extendBase(multiValueStyles),
-					multiValueLabel: extendBase(multiValueLabelStyles),
-					multiValueRemove: extendBase(multiValueRemoveStyles)
+					container: extendBase<ContainerProps>(containerStyles),
+					control: extendBase<ControlProps>(controlStyles),
+					menu: extendBase<MenuProps>(menuStyles),
+					menuList: extendBase<MenuListProps>(menuListStyles),
+					input: extendBase<InputProps>(inputStyles),
+					placeholder: extendBase<PlaceholderProps>(placeholderStyles),
+					option: extendBase<OptionProps>(optionStyles),
+					group: extendBase<GroupProps>(groupStyles),
+					indicatorSeparator:
+						extendBase<IndicatorSeparatorProps>(indicatorSeparatorStyles),
+					clearIndicator: extendBase<ClearIndicatorProps>(clearIndicatorStyles),
+					loadingIndicator: extendBase<LoadingIndicatorProps>(loadingIndicatorStyles),
+					dropdownIndicator: extendBase<DropdownIndicatorProps>(
+						dropdownIndicatorStyles,
+						dropdownModeStyles
+					),
+					indicatorsContainer:
+						extendBase<IndicatorsContainerProps>(indicatorsContainerStyles),
+					groupHeading: extendBase<GroupHeadingProps>(groupHeadingStyles),
+					loadingMessage: extendBase<NoticeProps>(loadingMessageStyles),
+					noOptionsMessage: extendBase<NoticeProps>(noOptionsMessageStyles),
+					menuPortal: extendBase<PortalStyleArgs>(menuPortalStyles),
+					valueContainer: extendBase<ValueContainerProps>(valueContainerStyles),
+					singleValue: extendBase<SingleValueProps>(singleValueStyles),
+					multiValue: extendBase<MultiValueProps>(multiValueStyles),
+					multiValueLabel: extendBase<MultiValueProps>(multiValueLabelStyles),
+					multiValueRemove: extendBase<MultiValueRemoveProps>(multiValueRemoveStyles)
 				}}
 				{...props}
 			/>
