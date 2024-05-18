@@ -20,6 +20,7 @@
 		"sbbuild": "storybook build"
 	},
 	"devDependencies": {
+		"@babel/core": "^7.24.5",
 		"@babel/plugin-proposal-unicode-property-regex": "^7.18.6",
 		"@chromatic-com/storybook": "1.3.3",
 		"@storybook/addon-essentials": "^8.0.8",
