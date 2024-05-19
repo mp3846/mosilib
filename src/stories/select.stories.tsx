@@ -7,8 +7,8 @@ const meta: Meta<typeof Select> = {
 	render: (args) => {
 		const [value, setValue] = useState(args.value || '')
 		return (
-			<div style={{ fontFamily: defaultFont }}>
-				<Select {...args} value={value} onChange={(newValue) => setValue(newValue)} />
+			<div style={{ fontFamily: defaultFont, minHeight: '40vh' }}>
+				<Select {...args} value={value} onChange={setValue} />
 			</div>
 		)
 	},
@@ -20,6 +20,9 @@ const meta: Meta<typeof Select> = {
 	args: {
 		labelSide: 'left',
 		placeholder: 'Who to blame?',
+		rtl: false,
+		autoFocus: false,
+		disabled: false,
 		options: [
 			{ label: 'Me', value: 1 },
 			{ label: 'You', value: 2 },

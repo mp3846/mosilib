@@ -67,17 +67,17 @@ type SelectType = {
 	indicatorsContainerStyles?: OverridingStyles<IndicatorsContainerProps>
 }
 
-type OverridingStyles<T> = (state: T) => CSSObjectWithLabel
+type OverridingStyles<T> = (props: T) => CSSObjectWithLabel
 
 type ExtendBase = <T>(
 	newStyles?: OverridingStyles<T>,
 	modeStyles?: OverridingStyles<T>
-) => (base: CSSObjectWithLabel, state: T) => CSSObjectWithLabel
+) => (base: CSSObjectWithLabel, props: T) => CSSObjectWithLabel
 
-const extendBase: ExtendBase = (newStyles, modeStyles) => (base, state) => ({
+const extendBase: ExtendBase = (newStyles, modeStyles) => (base, props) => ({
 	...base,
-	...(modeStyles ? modeStyles(state) : {}),
-	...(newStyles ? newStyles(state) : {})
+	...(modeStyles ? modeStyles(props) : {}),
+	...(newStyles ? newStyles(props) : {})
 })
 
 const Select: FC<SelectType> = ({
@@ -125,8 +125,45 @@ const Select: FC<SelectType> = ({
 	const uniqueID = useId()
 	const uniqueInstanceID = useId()
 
-	const dropdownModeStyles: OverridingStyles<DropdownIndicatorProps> = (state) => ({
-		display: mode === 'simple' ? 'block' : 'none'
+	const dropdownModeStyles: OverridingStyles<DropdownIndicatorProps> = () => ({
+		display: mode === 'simple' ? 'flex' : 'none'
+	})
+
+	const containerModeStyles: OverridingStyles<ContainerProps> = () => ({
+		boxShadow:
+			mode === '3D'
+				? '0 0 1px 0 #75757511, inset 2px 2px 4px 0 #a8a8a8, inset -2px -2px 4px 0 #fff'
+				: 'initial',
+		borderRadius: '4px'
+	})
+
+	const clearIndicatorModeStyles: OverridingStyles<ClearIndicatorProps> = () => ({
+		display: mode === '3D' ? 'none' : 'flex'
+	})
+
+	const controlModeStyles: OverridingStyles<ControlProps> = () => ({
+		background: 'transparent',
+		border: mode === '3D' ? 'none' : '1px solid gray',
+		':hover': { border: mode === '3D' ? 'none' : '1px solid gray' },
+		boxShadow: 'none'
+	})
+
+	const placeholderModeStyles: OverridingStyles<PlaceholderProps> = () => ({
+		fontStyle: 'italic'
+	})
+
+	const menuListModeStyles: OverridingStyles<MenuListProps> = () => ({
+		padding: 0
+	})
+
+	const optionModeStyles: OverridingStyles<OptionProps> = ({ isSelected }) => ({
+		background: isSelected ? 'wheat' : 'transparent',
+		color: isSelected ? 'black' : 'initial',
+		':hover': { background: '#eee' }
+	})
+
+	const indicatorSeparatorModeStyles: OverridingStyles<IndicatorSeparatorProps> = () => ({
+		display: 'none'
 	})
 
 	return (
@@ -151,17 +188,25 @@ const Select: FC<SelectType> = ({
 				onChange={onChange}
 				className={joiner(styles.select, styles[`select_${mode}`], className || '')}
 				styles={{
-					container: extendBase<ContainerProps>(containerStyles),
-					control: extendBase<ControlProps>(controlStyles),
+					container: extendBase<ContainerProps>(containerStyles, containerModeStyles),
+					control: extendBase<ControlProps>(controlStyles, controlModeStyles),
 					menu: extendBase<MenuProps>(menuStyles),
-					menuList: extendBase<MenuListProps>(menuListStyles),
+					menuList: extendBase<MenuListProps>(menuListStyles, menuListModeStyles),
 					input: extendBase<InputProps>(inputStyles),
-					placeholder: extendBase<PlaceholderProps>(placeholderStyles),
-					option: extendBase<OptionProps>(optionStyles),
+					placeholder: extendBase<PlaceholderProps>(
+						placeholderStyles,
+						placeholderModeStyles
+					),
+					option: extendBase<OptionProps>(optionStyles, optionModeStyles),
 					group: extendBase<GroupProps>(groupStyles),
-					indicatorSeparator:
-						extendBase<IndicatorSeparatorProps>(indicatorSeparatorStyles),
-					clearIndicator: extendBase<ClearIndicatorProps>(clearIndicatorStyles),
+					indicatorSeparator: extendBase<IndicatorSeparatorProps>(
+						indicatorSeparatorStyles,
+						indicatorSeparatorModeStyles
+					),
+					clearIndicator: extendBase<ClearIndicatorProps>(
+						clearIndicatorStyles,
+						clearIndicatorModeStyles
+					),
 					loadingIndicator: extendBase<LoadingIndicatorProps>(loadingIndicatorStyles),
 					dropdownIndicator: extendBase<DropdownIndicatorProps>(
 						dropdownIndicatorStyles,
