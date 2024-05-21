@@ -11,6 +11,7 @@ type SwitchType = {
 	labelSide?: 'right' | 'left'
 	mode?: 'simple' | '3D'
 	className?: string
+	containerClassName?: string
 	disabled?: boolean
 	required?: boolean
 	name?: string
@@ -25,6 +26,7 @@ const Switch: FC<SwitchType> = ({
 	required = false,
 	name,
 	className,
+	containerClassName,
 	value,
 	label,
 	labelSide = 'left',
@@ -33,7 +35,7 @@ const Switch: FC<SwitchType> = ({
 	const uniqueID = useId()
 	return (
 		<div
-			className={styles.container}
+			className={joiner(styles.container, containerClassName)}
 			style={{ flexDirection: labelSide === 'left' ? 'row-reverse' : 'row' }}>
 			<RXSwitch.Root
 				id={uniqueID}
@@ -41,7 +43,7 @@ const Switch: FC<SwitchType> = ({
 				disabled={disabled}
 				required={required}
 				value={value}
-				className={joiner(styles.root, styles[`switch_${mode}`], className || '')}
+				className={joiner(styles.root, styles[`switch_${mode}`], className)}
 				defaultChecked={defaultChecked}
 				checked={checked}
 				onCheckedChange={onChange}>

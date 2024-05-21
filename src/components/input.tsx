@@ -8,6 +8,7 @@ type InputType = {
 	labelSide?: 'right' | 'left'
 	mode?: 'simple' | '3D'
 	className?: string
+	containerClassName?: string
 	disabled?: boolean
 	required?: boolean
 	name?: string
@@ -21,6 +22,7 @@ const Input: FC<InputType> = ({
 	required = false,
 	name,
 	className,
+	containerClassName,
 	label,
 	labelSide = 'left',
 	value,
@@ -30,7 +32,7 @@ const Input: FC<InputType> = ({
 	const uniqueID = useId()
 	return (
 		<div
-			className={styles.container}
+			className={joiner(styles.container, containerClassName)}
 			style={{ flexDirection: labelSide === 'left' ? 'row-reverse' : 'row' }}>
 			<input
 				id={uniqueID}

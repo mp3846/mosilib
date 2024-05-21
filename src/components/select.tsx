@@ -31,6 +31,7 @@ type SelectType = {
 	labelSide?: 'right' | 'left'
 	mode?: 'simple' | '3D'
 	className?: string
+	containerClassName?: string
 	disabled?: boolean
 	required?: boolean
 	name?: string
@@ -90,6 +91,7 @@ const Select: FC<SelectType> = ({
 	autoFocus,
 	noOptionsText,
 	className,
+	containerClassName,
 	placeholder,
 	value,
 	defaultValue,
@@ -168,7 +170,7 @@ const Select: FC<SelectType> = ({
 
 	return (
 		<div
-			className={styles.container}
+			className={joiner(styles.container, containerClassName)}
 			style={{ flexDirection: labelSide === 'left' ? 'row-reverse' : 'row' }}>
 			<ReactSelect
 				inputId={uniqueID}

@@ -16,6 +16,7 @@ type CheckboxType = {
 	value?: 'on' | 'off'
 	mode?: 'simple' | 'fill'
 	className?: string
+	containerClassName?: string
 }
 
 const Checkbox: FC<CheckboxType> = ({
@@ -25,6 +26,7 @@ const Checkbox: FC<CheckboxType> = ({
 	label,
 	labelSide = 'left',
 	className,
+	containerClassName,
 	disabled = false,
 	required = false,
 	name,
@@ -34,7 +36,7 @@ const Checkbox: FC<CheckboxType> = ({
 	const uniqueID = useId()
 	return (
 		<div
-			className={styles.container}
+			className={joiner(styles.container, containerClassName)}
 			style={{ flexDirection: labelSide === 'left' ? 'row-reverse' : 'row' }}>
 			<RXCheckbox.Root
 				id={uniqueID}
