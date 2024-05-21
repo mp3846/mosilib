@@ -14,7 +14,7 @@ const meta: Meta<typeof Checkbox> = {
 		backgrounds: { default: 'light-gray' }
 	},
 	tags: ['autodocs'],
-	args: { defaultChecked: true }
+	args: { defaultChecked: true, labelSide: 'left' }
 }
 
 export default meta

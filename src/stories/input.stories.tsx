@@ -17,7 +17,7 @@ const meta: Meta<typeof Input> = {
 		)
 	},
 	tags: ['autodocs'],
-	args: { placeholder: 'What is your name?' }
+	args: { placeholder: 'What is your name?', labelSide: 'left' }
 }
 
 export default meta
