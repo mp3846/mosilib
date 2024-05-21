@@ -5,8 +5,7 @@
  * @param classNames - An array of CSS class names.
  * @returns The combined CSS class names (separated by space).
  */
-const joiner = (...classNames: string[]) =>
-	classNames.length > 1 ? classNames.join(' ') : classNames[0]
+const joiner = (...classNames: (string | undefined)[]) => classNames.filter(Boolean).join(' ')
 
 type CapitalizeOption = 'first' | 'all'
 

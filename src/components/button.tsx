@@ -19,7 +19,7 @@ const Button: FC<ButtonType> = ({
 	<div className={styles.container}>
 		<button
 			onClick={onClick}
-			className={joiner(styles.button, styles['button-' + mode], className || '')}
+			className={joiner(styles.button, styles['button-' + mode], className)}
 			{...props}>
 			{text}
 		</button>

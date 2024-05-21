@@ -42,7 +42,7 @@ const Checkbox: FC<CheckboxType> = ({
 				disabled={disabled}
 				required={required}
 				value={value}
-				className={joiner(styles.root, className || '')}
+				className={joiner(styles.root, className)}
 				defaultChecked={defaultChecked}
 				checked={checked}
 				onCheckedChange={(checkedState) => onChange(!!checkedState)}>

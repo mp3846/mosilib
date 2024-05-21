@@ -186,7 +186,7 @@ const Select: FC<SelectType> = ({
 				isDisabled={disabled}
 				required={required}
 				onChange={onChange}
-				className={joiner(styles.select, styles[`select_${mode}`], className || '')}
+				className={joiner(styles.select, styles[`select_${mode}`], className)}
 				styles={{
 					container: extendBase<ContainerProps>(containerStyles, containerModeStyles),
 					control: extendBase<ControlProps>(controlStyles, controlModeStyles),
