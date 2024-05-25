@@ -174,10 +174,10 @@ const Select: FC<SelectType> = ({
 		padding: 0
 	})
 
-	const optionThemeStyles: OverridingStyles<OptionProps> = ({ isSelected }) => ({
-		background: isSelected ? 'wheat' : 'transparent',
+	const optionThemeStyles: OverridingStyles<OptionProps> = ({ isSelected, isFocused }) => ({
+		background: isSelected ? '#d6d6d6' : isFocused ? '#eee' : 'transparent',
 		color: isSelected ? 'black' : 'inherit',
-		':hover': { background: '#eee' }
+		':hover': { background: '#e5e5e5' }
 	})
 
 	const indicatorSeparatorThemeStyles: OverridingStyles<IndicatorSeparatorProps> = () => ({
