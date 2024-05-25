@@ -131,6 +131,19 @@ const Select: FC<SelectType> = ({
 		display: theme === 'simple' ? 'flex' : 'none'
 	})
 
+	const singleValueThemeStyles: OverridingStyles<SingleValueProps> = () => ({
+		color: 'inherit',
+		display: theme === 'simple' ? 'flex' : 'none'
+	})
+
+	const multiValueThemeStyles: OverridingStyles<MultiValueProps> = () => ({
+		color: 'inherit'
+	})
+
+	const inputThemeStyles: OverridingStyles<InputProps> = () => ({
+		color: 'inherit'
+	})
+
 	const containerThemeStyles: OverridingStyles<ContainerProps> = () => ({
 		boxShadow:
 			theme === '3D'
@@ -151,6 +164,7 @@ const Select: FC<SelectType> = ({
 	})
 
 	const placeholderThemeStyles: OverridingStyles<PlaceholderProps> = () => ({
+		color: 'inherit',
 		fontStyle: 'italic'
 	})
 
@@ -160,7 +174,7 @@ const Select: FC<SelectType> = ({
 
 	const optionThemeStyles: OverridingStyles<OptionProps> = ({ isSelected }) => ({
 		background: isSelected ? 'wheat' : 'transparent',
-		color: isSelected ? 'black' : 'initial',
+		color: isSelected ? 'black' : 'inherit',
 		':hover': { background: '#eee' }
 	})
 
@@ -194,7 +208,7 @@ const Select: FC<SelectType> = ({
 					control: extendBase<ControlProps>(controlStyles, controlThemeStyles),
 					menu: extendBase<MenuProps>(menuStyles),
 					menuList: extendBase<MenuListProps>(menuListStyles, menuListThemeStyles),
-					input: extendBase<InputProps>(inputStyles),
+					input: extendBase<InputProps>(inputStyles, inputThemeStyles),
 					placeholder: extendBase<PlaceholderProps>(
 						placeholderStyles,
 						placeholderThemeStyles
@@ -221,8 +235,14 @@ const Select: FC<SelectType> = ({
 					noOptionsMessage: extendBase<NoticeProps>(noOptionsMessageStyles),
 					menuPortal: extendBase<PortalStyleArgs>(menuPortalStyles),
 					valueContainer: extendBase<ValueContainerProps>(valueContainerStyles),
-					singleValue: extendBase<SingleValueProps>(singleValueStyles),
-					multiValue: extendBase<MultiValueProps>(multiValueStyles),
+					singleValue: extendBase<SingleValueProps>(
+						singleValueStyles,
+						singleValueThemeStyles
+					),
+					multiValue: extendBase<MultiValueProps>(
+						multiValueStyles,
+						multiValueThemeStyles
+					),
 					multiValueLabel: extendBase<MultiValueProps>(multiValueLabelStyles),
 					multiValueRemove: extendBase<MultiValueRemoveProps>(multiValueRemoveStyles)
 				}}
