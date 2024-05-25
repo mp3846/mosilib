@@ -14,7 +14,7 @@ type CheckboxType = {
 	required?: boolean
 	name?: string
 	value?: 'on' | 'off'
-	mode?: 'simple' | 'fill'
+	theme?: 'simple' | 'fill'
 	className?: string
 	containerClassName?: string
 }
@@ -31,7 +31,7 @@ const Checkbox: FC<CheckboxType> = ({
 	required = false,
 	name,
 	value,
-	mode = 'simple'
+	theme = 'simple'
 }) => {
 	const uniqueID = useId()
 	return (
@@ -48,7 +48,7 @@ const Checkbox: FC<CheckboxType> = ({
 				defaultChecked={defaultChecked}
 				checked={checked}
 				onCheckedChange={(checkedState) => onChange(!!checkedState)}>
-				<RXCheckbox.Indicator className={joiner(styles.indicator, styles[mode])}>
+				<RXCheckbox.Indicator className={joiner(styles.indicator, styles[theme])}>
 					<LuCheck />
 				</RXCheckbox.Indicator>
 			</RXCheckbox.Root>

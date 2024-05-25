@@ -37,9 +37,9 @@ export default meta
 type Story = StoryObj<typeof Select>
 
 export const Simple: Story = {
-	args: { label: 'Simple', mode: 'simple' }
+	args: { label: 'Simple', theme: 'simple' }
 }
 
 export const _3D: Story = {
-	args: { label: '3D', mode: '3D' }
+	args: { label: '3D', theme: '3D' }
 }

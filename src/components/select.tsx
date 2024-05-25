@@ -29,7 +29,7 @@ type SelectType = {
 	onChange?: (newValue: any) => void
 	label?: string
 	labelSide?: 'right' | 'left'
-	mode?: 'simple' | '3D'
+	theme?: 'simple' | '3D'
 	className?: string
 	containerClassName?: string
 	disabled?: boolean
@@ -72,12 +72,12 @@ type OverridingStyles<T> = (props: T) => CSSObjectWithLabel
 
 type ExtendBase = <T>(
 	newStyles?: OverridingStyles<T>,
-	modeStyles?: OverridingStyles<T>
+	themeStyles?: OverridingStyles<T>
 ) => (base: CSSObjectWithLabel, props: T) => CSSObjectWithLabel
 
-const extendBase: ExtendBase = (newStyles, modeStyles) => (base, props) => ({
+const extendBase: ExtendBase = (newStyles, themeStyles) => (base, props) => ({
 	...base,
-	...(modeStyles ? modeStyles(props) : {}),
+	...(themeStyles ? themeStyles(props) : {}),
 	...(newStyles ? newStyles(props) : {})
 })
 
@@ -99,7 +99,7 @@ const Select: FC<SelectType> = ({
 	options,
 	label,
 	labelSide = 'left',
-	mode = 'simple',
+	theme = 'simple',
 	containerStyles,
 	controlStyles,
 	inputStyles,
@@ -127,44 +127,44 @@ const Select: FC<SelectType> = ({
 	const uniqueID = useId()
 	const uniqueInstanceID = useId()
 
-	const dropdownModeStyles: OverridingStyles<DropdownIndicatorProps> = () => ({
-		display: mode === 'simple' ? 'flex' : 'none'
+	const dropdownThemeStyles: OverridingStyles<DropdownIndicatorProps> = () => ({
+		display: theme === 'simple' ? 'flex' : 'none'
 	})
 
-	const containerModeStyles: OverridingStyles<ContainerProps> = () => ({
+	const containerThemeStyles: OverridingStyles<ContainerProps> = () => ({
 		boxShadow:
-			mode === '3D'
+			theme === '3D'
 				? '0 0 1px 0 #75757511, inset 2px 2px 4px 0 #a8a8a8, inset -2px -2px 4px 0 #fff'
 				: 'initial',
 		borderRadius: '4px'
 	})
 
-	const clearIndicatorModeStyles: OverridingStyles<ClearIndicatorProps> = () => ({
-		display: mode === '3D' ? 'none' : 'flex'
+	const clearIndicatorThemeStyles: OverridingStyles<ClearIndicatorProps> = () => ({
+		display: theme === '3D' ? 'none' : 'flex'
 	})
 
-	const controlModeStyles: OverridingStyles<ControlProps> = () => ({
+	const controlThemeStyles: OverridingStyles<ControlProps> = () => ({
 		background: 'transparent',
-		border: mode === '3D' ? 'none' : '1px solid gray',
-		':hover': { border: mode === '3D' ? 'none' : '1px solid gray' },
+		border: theme === '3D' ? 'none' : '1px solid gray',
+		':hover': { border: theme === '3D' ? 'none' : '1px solid gray' },
 		boxShadow: 'none'
 	})
 
-	const placeholderModeStyles: OverridingStyles<PlaceholderProps> = () => ({
+	const placeholderThemeStyles: OverridingStyles<PlaceholderProps> = () => ({
 		fontStyle: 'italic'
 	})
 
-	const menuListModeStyles: OverridingStyles<MenuListProps> = () => ({
+	const menuListThemeStyles: OverridingStyles<MenuListProps> = () => ({
 		padding: 0
 	})
 
-	const optionModeStyles: OverridingStyles<OptionProps> = ({ isSelected }) => ({
+	const optionThemeStyles: OverridingStyles<OptionProps> = ({ isSelected }) => ({
 		background: isSelected ? 'wheat' : 'transparent',
 		color: isSelected ? 'black' : 'initial',
 		':hover': { background: '#eee' }
 	})
 
-	const indicatorSeparatorModeStyles: OverridingStyles<IndicatorSeparatorProps> = () => ({
+	const indicatorSeparatorThemeStyles: OverridingStyles<IndicatorSeparatorProps> = () => ({
 		display: 'none'
 	})
 
@@ -188,31 +188,31 @@ const Select: FC<SelectType> = ({
 				isDisabled={disabled}
 				required={required}
 				onChange={onChange}
-				className={joiner(styles.select, styles[`select_${mode}`], className)}
+				className={joiner(styles.select, styles[`select_${theme}`], className)}
 				styles={{
-					container: extendBase<ContainerProps>(containerStyles, containerModeStyles),
-					control: extendBase<ControlProps>(controlStyles, controlModeStyles),
+					container: extendBase<ContainerProps>(containerStyles, containerThemeStyles),
+					control: extendBase<ControlProps>(controlStyles, controlThemeStyles),
 					menu: extendBase<MenuProps>(menuStyles),
-					menuList: extendBase<MenuListProps>(menuListStyles, menuListModeStyles),
+					menuList: extendBase<MenuListProps>(menuListStyles, menuListThemeStyles),
 					input: extendBase<InputProps>(inputStyles),
 					placeholder: extendBase<PlaceholderProps>(
 						placeholderStyles,
-						placeholderModeStyles
+						placeholderThemeStyles
 					),
-					option: extendBase<OptionProps>(optionStyles, optionModeStyles),
+					option: extendBase<OptionProps>(optionStyles, optionThemeStyles),
 					group: extendBase<GroupProps>(groupStyles),
 					indicatorSeparator: extendBase<IndicatorSeparatorProps>(
 						indicatorSeparatorStyles,
-						indicatorSeparatorModeStyles
+						indicatorSeparatorThemeStyles
 					),
 					clearIndicator: extendBase<ClearIndicatorProps>(
 						clearIndicatorStyles,
-						clearIndicatorModeStyles
+						clearIndicatorThemeStyles
 					),
 					loadingIndicator: extendBase<LoadingIndicatorProps>(loadingIndicatorStyles),
 					dropdownIndicator: extendBase<DropdownIndicatorProps>(
 						dropdownIndicatorStyles,
-						dropdownModeStyles
+						dropdownThemeStyles
 					),
 					indicatorsContainer:
 						extendBase<IndicatorsContainerProps>(indicatorsContainerStyles),

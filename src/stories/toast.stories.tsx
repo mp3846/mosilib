@@ -19,9 +19,9 @@ const meta: Meta<typeof Toast> = {
 		</div>
 	),
 	tags: ['autodocs'],
-	argTypes: { mode: { control: 'select' } },
+	argTypes: { costume: { control: 'select' } },
 	args: {
-		mode: 'info',
+		costume: 'info',
 		hasAction: false,
 		onAction: fn()
 	}
@@ -40,7 +40,7 @@ export const Info: Story = {
 export const Warning: Story = {
 	args: {
 		title: 'Warning',
-		mode: 'warning',
+		costume: 'warning',
 		hasAction: true,
 		content: 'This is the content of a warning toast'
 	}
@@ -49,7 +49,7 @@ export const Warning: Story = {
 export const Error: Story = {
 	args: {
 		title: 'Error',
-		mode: 'error',
+		costume: 'error',
 		content: 'This is the content of an Error message toast'
 	}
 }

@@ -4,7 +4,7 @@ import { joiner } from '../utils'
 
 type ButtonType = {
 	text: string
-	mode?: 'simple' | '3D'
+	theme?: 'simple' | '3D'
 	className?: string
 	containerClassName?: string
 	onClick?: (...args: any[]) => void
@@ -12,7 +12,7 @@ type ButtonType = {
 
 const Button: FC<ButtonType> = ({
 	text,
-	mode = 'simple',
+	theme = 'simple',
 	className,
 	containerClassName,
 	onClick = () => {},
@@ -21,7 +21,7 @@ const Button: FC<ButtonType> = ({
 	<div className={joiner(styles.container, containerClassName)}>
 		<button
 			onClick={onClick}
-			className={joiner(styles.button, styles['button-' + mode], className)}
+			className={joiner(styles.button, styles['button-' + theme], className)}
 			{...props}>
 			{text}
 		</button>

@@ -7,12 +7,12 @@ const GlobalErrorHandler: FC<any> = ({ children }: { children: ReactNode }) => {
 
 	useEffect(() => {
 		const handleWindowError: OnErrorEventHandler = (error) => {
-			setToast({ ...handleError(error), mode: 'error' })
+			setToast({ ...handleError(error), costume: 'error' })
 			return true
 		}
 
 		const handlePromiseRejection = (event: PromiseRejectionEvent) => {
-			setToast({ ...handleError(event.reason), mode: 'error' })
+			setToast({ ...handleError(event.reason), costume: 'error' })
 			return true
 		}
 

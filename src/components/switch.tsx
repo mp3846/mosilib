@@ -9,7 +9,7 @@ type SwitchType = {
 	onChange?: (checked: boolean) => void
 	label?: string
 	labelSide?: 'right' | 'left'
-	mode?: 'simple' | '3D'
+	theme?: 'simple' | '3D'
 	className?: string
 	containerClassName?: string
 	disabled?: boolean
@@ -30,7 +30,7 @@ const Switch: FC<SwitchType> = ({
 	value,
 	label,
 	labelSide = 'left',
-	mode = 'simple'
+	theme = 'simple'
 }) => {
 	const uniqueID = useId()
 	return (
@@ -43,11 +43,11 @@ const Switch: FC<SwitchType> = ({
 				disabled={disabled}
 				required={required}
 				value={value}
-				className={joiner(styles.root, styles[`switch_${mode}`], className)}
+				className={joiner(styles.root, styles[`switch_${theme}`], className)}
 				defaultChecked={defaultChecked}
 				checked={checked}
 				onCheckedChange={onChange}>
-				<RXSwitch.Thumb className={joiner(styles.thumb, styles[`switch_${mode}`])} />
+				<RXSwitch.Thumb className={joiner(styles.thumb, styles[`switch_${theme}`])} />
 			</RXSwitch.Root>
 			{label && (
 				<label className={styles.label} htmlFor={uniqueID}>

@@ -24,9 +24,9 @@ export default meta
 type Story = StoryObj<typeof Input>
 
 export const Simple: Story = {
-	args: { label: 'Simple', mode: 'simple', value: 'Mosi' }
+	args: { label: 'Simple', theme: 'simple', value: 'Mosi' }
 }
 
 export const _3D: Story = {
-	args: { label: '3D', mode: '3D' }
+	args: { label: '3D', theme: '3D' }
 }

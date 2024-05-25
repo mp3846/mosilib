@@ -21,9 +21,9 @@ export default meta
 type Story = StoryObj<typeof Checkbox>
 
 export const Simple: Story = {
-	args: { label: 'Simple', mode: 'simple' }
+	args: { label: 'Simple', theme: 'simple' }
 }
 
 export const Fill: Story = {
-	args: { label: 'Fill', mode: 'fill' }
+	args: { label: 'Fill', theme: 'fill' }
 }

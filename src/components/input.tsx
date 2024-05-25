@@ -6,7 +6,7 @@ type InputType = {
 	onChange?: (...args: any[]) => void
 	label?: string
 	labelSide?: 'right' | 'left'
-	mode?: 'simple' | '3D'
+	theme?: 'simple' | '3D'
 	className?: string
 	containerClassName?: string
 	disabled?: boolean
@@ -27,7 +27,7 @@ const Input: FC<InputType> = ({
 	labelSide = 'left',
 	value,
 	placeholder,
-	mode = 'simple'
+	theme = 'simple'
 }) => {
 	const uniqueID = useId()
 	return (
@@ -41,7 +41,7 @@ const Input: FC<InputType> = ({
 				required={required}
 				value={value}
 				placeholder={placeholder}
-				className={joiner(styles.input, styles[`input_${mode}`], className)}
+				className={joiner(styles.input, styles[`input_${theme}`], className)}
 				onChange={onChange}
 			/>
 			{label && (

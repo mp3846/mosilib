@@ -14,7 +14,7 @@ const useTryCatch = <T extends any[]>(
 			setToast({})
 			await callback(...args)
 		} catch (err) {
-			setToast({ ...handleError(err), mode: 'error', duration: toastDuration })
+			setToast({ ...handleError(err), costume: 'error', duration: toastDuration })
 			onFailure(err, ...args)
 		} finally {
 			doFinally(...args)

@@ -23,13 +23,13 @@ type Story = StoryObj<typeof Button>
 export const _3D: Story = {
 	args: {
 		text: 'Click me',
-		mode: '3D'
+		theme: '3D'
 	}
 }
 
 export const Simple: Story = {
 	args: {
 		text: 'Click me',
-		mode: 'simple'
+		theme: 'simple'
 	}
 }

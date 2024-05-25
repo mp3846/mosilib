@@ -6,7 +6,7 @@ import { joiner } from '../utils'
 export interface ToastType {
 	title?: string
 	content?: string
-	mode?: 'info' | 'warning' | 'error'
+	costume?: 'info' | 'warning' | 'error'
 	className?: string
 	duration?: number
 	hasAction?: boolean
@@ -17,7 +17,7 @@ export interface ToastType {
 const Toast: FC<ToastType> = ({
 	title,
 	content,
-	mode = 'info',
+	costume = 'info',
 	className = '',
 	duration = Infinity,
 	hasAction = false,
@@ -33,7 +33,7 @@ const Toast: FC<ToastType> = ({
 		setOpen(showToast)
 		// Delay for smooth fade-out
 		const timeoutID = setTimeout(
-			() => setDelayedProps({ title, content, mode, duration, hasAction, actionText }),
+			() => setDelayedProps({ title, content, costume, duration, hasAction, actionText }),
 			showToast ? 0 : 300
 		)
 		return () => clearTimeout(timeoutID)
@@ -49,7 +49,7 @@ const Toast: FC<ToastType> = ({
 			<div className={styles.titleWrapper}>
 				<RXToast.Title
 					className={styles.toastTitle}
-					style={{ color: `var(--toast-color-title-${delayedProps.mode})` }}>
+					style={{ color: `var(--toast-color-title-${delayedProps.costume})` }}>
 					{delayedProps.title}
 				</RXToast.Title>
 				<RXToast.Close className={styles.toastClose} aria-label='Close'>
@@ -59,7 +59,7 @@ const Toast: FC<ToastType> = ({
 			{delayedProps.title && (
 				<span
 					className={styles.separator}
-					style={{ background: `var(--toast-color-title-${delayedProps.mode})` }}
+					style={{ background: `var(--toast-color-title-${delayedProps.costume})` }}
 				/>
 			)}
 			<RXToast.Description
