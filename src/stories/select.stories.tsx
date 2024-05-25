@@ -22,6 +22,7 @@ const meta: Meta<typeof Select> = {
 		placeholder: 'Who to blame?',
 		rtl: false,
 		autoFocus: false,
+		menuIsOpen: false,
 		disabled: false,
 		options: [
 			{ label: 'Me', value: 1 },

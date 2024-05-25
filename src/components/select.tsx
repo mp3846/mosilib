@@ -38,6 +38,7 @@ type SelectType = {
 	rtl?: boolean
 	isClearable?: boolean
 	autoFocus?: boolean
+	menuIsOpen?: boolean
 	noOptionsText?: string
 	placeholder?: string
 	value?: any
@@ -89,6 +90,7 @@ const Select: FC<SelectType> = ({
 	name,
 	rtl,
 	autoFocus,
+	menuIsOpen,
 	noOptionsText,
 	className,
 	containerClassName,
@@ -198,6 +200,7 @@ const Select: FC<SelectType> = ({
 				isRtl={rtl}
 				isClearable={isClearable}
 				autoFocus={autoFocus}
+				menuIsOpen={menuIsOpen}
 				noOptionsMessage={() => noOptionsText}
 				isDisabled={disabled}
 				required={required}
