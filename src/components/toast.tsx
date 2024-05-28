@@ -3,10 +3,12 @@ import * as RXToast from '@radix-ui/react-toast'
 import styles from './styles/toast.module.css'
 import { joiner } from '../utils'
 
+type Costume = 'info' | 'warning' | 'error'
+
 export interface ToastType {
 	title?: string
 	content?: string
-	costume?: 'info' | 'warning' | 'error'
+	costume?: Costume
 	className?: string
 	duration?: number
 	hasAction?: boolean
@@ -37,7 +39,7 @@ const Toast: FC<ToastType> = ({
 			showToast ? 0 : 300
 		)
 		return () => clearTimeout(timeoutID)
-	}, [title, content])
+	}, [title, content, costume, duration, hasAction, actionText])
 
 	return (
 		<RXToast.Root
