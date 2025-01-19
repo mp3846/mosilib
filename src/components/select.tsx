@@ -25,11 +25,13 @@ import ReactSelect, {
 	PortalStyleArgs
 } from 'react-select'
 
+type Theme = 'simple' | '3D' | 'material'
+
 type SelectType = {
 	onChange?: (newValue: any) => void
 	label?: string
 	labelSide?: 'right' | 'left'
-	theme?: 'simple' | '3D'
+	theme?: Theme
 	className?: string
 	containerClassName?: string
 	disabled?: boolean

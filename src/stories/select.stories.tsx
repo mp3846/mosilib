@@ -17,12 +17,15 @@ const meta: Meta<typeof Select> = {
 		backgrounds: { default: 'light-gray' }
 	},
 	tags: ['autodocs'],
+	argTypes: {
+		theme: { control: 'select', options: ['simple', '3D', 'material'] },
+		labelSide: { control: 'select', options: ['left', 'right'] }
+	},
 	args: {
 		labelSide: 'left',
 		placeholder: 'Who to blame?',
 		rtl: false,
 		autoFocus: false,
-		menuIsOpen: false,
 		disabled: false,
 		options: [
 			{ label: 'Me', value: 1 },
