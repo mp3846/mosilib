@@ -3,13 +3,15 @@ import styles from './styles/switch.module.css'
 import * as RXSwitch from '@radix-ui/react-switch'
 import { joiner } from '../utils'
 
+type Theme = 'simple' | '3D'
+
 type SwitchType = {
 	defaultChecked?: boolean
 	checked: boolean
 	onChange?: (checked: boolean) => void
 	label?: string
 	labelSide?: 'right' | 'left'
-	theme?: 'simple' | '3D'
+	theme?: Theme
 	className?: string
 	containerClassName?: string
 	disabled?: boolean

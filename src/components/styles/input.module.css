@@ -52,3 +52,11 @@
 	background-color: #39383b;
 	color: #e3eaee;
 }
+
+.input.input_material {
+	transform: scale(0.9);
+}
+
+.input.input_material input {
+	padding: 12px auto !important;
+}

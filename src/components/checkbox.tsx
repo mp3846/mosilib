@@ -4,6 +4,8 @@ import * as RXCheckbox from '@radix-ui/react-checkbox'
 import { joiner } from '../utils'
 import { LuCheck } from 'react-icons/lu'
 
+type Theme = 'simple' | 'fill' | 'material'
+
 type CheckboxType = {
 	defaultChecked?: boolean
 	checked: boolean
@@ -14,7 +16,7 @@ type CheckboxType = {
 	required?: boolean
 	name?: string
 	value?: 'on' | 'off'
-	theme?: 'simple' | 'fill'
+	theme?: Theme
 	className?: string
 	containerClassName?: string
 }

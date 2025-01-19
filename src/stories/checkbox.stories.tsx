@@ -14,6 +14,10 @@ const meta: Meta<typeof Checkbox> = {
 		backgrounds: { default: 'light-gray' }
 	},
 	tags: ['autodocs'],
+	argTypes: {
+		theme: { control: 'select', options: ['simple', 'fill', 'material'] },
+		labelSide: { control: 'select', options: ['left', 'right'] }
+	},
 	args: { defaultChecked: true, labelSide: 'left' }
 }
 
@@ -26,4 +30,8 @@ export const Simple: Story = {
 
 export const Fill: Story = {
 	args: { label: 'Fill', theme: 'fill' }
+}
+
+export const Material: Story = {
+	args: { label: 'Material', theme: 'material' }
 }

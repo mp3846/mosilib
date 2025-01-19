@@ -14,11 +14,22 @@ const meta: Meta<typeof Button> = {
 		backgrounds: { default: 'light-gray' }
 	},
 	tags: ['autodocs'],
+	argTypes: {
+		theme: { control: 'select', options: ['simple', '3D', 'material'] },
+		variant: { control: 'select', options: ['text', 'outlined', 'contained'] }
+	},
 	args: { text: 'Click me' }
 }
 
 export default meta
 type Story = StoryObj<typeof Button>
+
+export const Simple: Story = {
+	args: {
+		text: 'Click me',
+		theme: 'simple'
+	}
+}
 
 export const _3D: Story = {
 	args: {
@@ -27,9 +38,10 @@ export const _3D: Story = {
 	}
 }
 
-export const Simple: Story = {
+export const Material: Story = {
 	args: {
 		text: 'Click me',
-		theme: 'simple'
+		theme: 'material',
+		variant: 'outlined'
 	}
 }

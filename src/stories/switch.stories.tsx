@@ -14,6 +14,10 @@ const meta: Meta<typeof Switch> = {
 		backgrounds: { default: 'light-gray' }
 	},
 	tags: ['autodocs'],
+	argTypes: {
+		theme: { control: 'select', options: ['simple', '3D'] },
+		labelSide: { control: 'select', options: ['left', 'right'] }
+	},
 	args: { defaultChecked: true, labelSide: 'left' }
 }
 

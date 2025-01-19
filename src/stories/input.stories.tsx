@@ -17,6 +17,10 @@ const meta: Meta<typeof Input> = {
 		)
 	},
 	tags: ['autodocs'],
+	argTypes: {
+		theme: { control: 'select', options: ['simple', '3D', 'material'] },
+		labelSide: { control: 'select', options: ['left', 'right'] }
+	},
 	args: { placeholder: 'What is your name?', labelSide: 'left' }
 }
 
@@ -29,4 +33,8 @@ export const Simple: Story = {
 
 export const _3D: Story = {
 	args: { label: '3D', theme: '3D' }
+}
+
+export const Material: Story = {
+	args: { label: 'Material', theme: 'material', value: 'Mostafa' }
 }
