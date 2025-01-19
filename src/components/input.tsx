@@ -45,21 +45,21 @@ const Input: FC<InputType> = ({
 	}
 
 	return (
-		<div
-			className={joiner(styles.container, containerClassName)}
-			style={{ flexDirection: labelSide === 'left' ? 'row-reverse' : 'row' }}>
+		<div>
 			{theme === 'material' && (
 				<TextField label={placeholder} variant='outlined' {...commonProps} />
 			)}
 			{theme !== 'material' && (
-				<>
+				<div
+					className={joiner(styles.container, containerClassName)}
+					style={{ flexDirection: labelSide === 'left' ? 'row-reverse' : 'row' }}>
 					<input {...commonProps} placeholder={placeholder} />
 					{label && (
 						<label className={styles.label} htmlFor={uniqueID}>
 							{label}
 						</label>
 					)}
-				</>
+				</div>
 			)}
 		</div>
 	)
