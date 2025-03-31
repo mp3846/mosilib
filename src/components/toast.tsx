@@ -21,7 +21,7 @@ const Toast: FC<ToastType> = ({
 	content,
 	costume = 'info',
 	className = '',
-	duration = Infinity,
+	duration = 10000,
 	hasAction = false,
 	actionText = 'OK',
 	onAction = () => {},
